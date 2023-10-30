@@ -6,16 +6,13 @@ authors = ["Lucas Oliveira <olivmath@protonmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
 cffi = "^1.16.0"
+python = "^3.9"
 
-[tool.poetry.extras]
-clang = ["cffi"]
-rust = ["cffi"]
-
-[tool.poetry.dev-dependencies]
-pytest = "^7.4.3"
+[tool.poetry.group.dev.dependencies]
+pytest-benchmark = "^4.0.0"
 pyclean = "^2.7.5"
+pytest = "^7.4.3"
 
 [build-system]
 requires = ["poetry-core"]
