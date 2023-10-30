@@ -1,0 +1,1 @@
+gcc -shared -o libfibonacccy_c.so fibonacci.c
