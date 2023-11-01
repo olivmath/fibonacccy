@@ -64,14 +64,16 @@ fn matrix_multiply(a: &[[u64; 2]; 2], b: &[[u64; 2]; 2]) -> [[u64; 2]; 2] {
 }
 
 #[no_mangle]
-pub extern "C" fn fibonacci(n: i32) -> *mut i32 {
+pub extern "C" fn fibonacci(n: i32, callback: extern "C" fn(i32, i32) -> i32) -> *mut i32 {
     if n <= 0 {
         return std::ptr::null_mut();
     }
 
     let mut seq = Vec::with_capacity(n as usize);
     for i in 0..n {
-        seq.push(fibo_matrix_exponential(i as u32) as i32);
+        let fibo = fibo_matrix_exponential(i as u32) as i32;
+        let result = callback(fibo, 1);
+        seq.push(result);
     }
 
     let boxed_seq = seq.into_boxed_slice();
@@ -86,3 +88,5 @@ pub extern "C" fn free_fib(ptr: *mut i32, n: i32) {
         let _boxed = Box::from_raw(std::slice::from_raw_parts_mut(ptr, n as usize));
     }
 }
+
+
