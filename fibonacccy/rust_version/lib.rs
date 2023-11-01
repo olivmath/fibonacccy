@@ -4,7 +4,7 @@ pub extern "C" fn fibo_recursive(length: u32) -> u64 {
         return length as u64;
     }
 
-    fibo(length - 1) + fibo(length - 2)
+    fibo_recursive(length - 1) + fibo_recursive(length - 2)
 }
 
 #[no_mangle]
@@ -33,7 +33,7 @@ pub extern "C" fn fibo_matrix_exponential(n: u32) -> u64 {
     }
 
     // Matriz de transformação
-    let mut a = [[1, 1], [1, 0]];
+    let a = [[1, 1], [1, 0]];
     let mut result = [[1, 0], [0, 1]];
 
     let mut b = a;
@@ -71,7 +71,7 @@ pub extern "C" fn fibonacci(n: i32) -> *mut i32 {
 
     let mut seq = Vec::with_capacity(n as usize);
     for i in 0..n {
-        seq.push(fibo(i as u32) as i32);
+        seq.push(fibo_matrix_exponential(i as u32) as i32);
     }
 
     let boxed_seq = seq.into_boxed_slice();

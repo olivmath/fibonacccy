@@ -3,7 +3,7 @@ int fibo_recursive(int length) {
         return length;
     }
 
-    return fibo(length - 1) + fibo(length - 2);
+    return fibo_recursive(length - 1) + fibo_recursive(length - 2);
 }
 
 
