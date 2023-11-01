@@ -18,6 +18,40 @@ class FiboPython:
 
         return fibo(length - 1) + fibo(length - 2)
 
+    def fibo_iter(self, n):
+        if n <= 1:
+            return n
+
+        a, b = 0, 1
+        for _ in range(2, n + 1):
+            a, b = b, a + b
+
+        return b
+
+    def matrix_multiply(self, a, b):
+        x = a[0][0] * b[0][0] + a[0][1] * b[1][0]
+        y = a[0][0] * b[0][1] + a[0][1] * b[1][1]
+        z = a[1][0] * b[0][0] + a[1][1] * b[1][0]
+        w = a[1][0] * b[0][1] + a[1][1] * b[1][1]
+
+        return [[x, y], [z, w]]
+
+    def fibo_matrix_exponential(self, n):
+        if n == 0:
+            return 0
+
+        a = [[1, 1], [1, 0]]
+        result = [[1, 0], [0, 1]]
+
+        m = n - 1
+        while m > 0:
+            if m % 2 == 1:
+                result = self.matrix_multiply(result, a)
+            a = self.matrix_multiply(a, a)
+            m //= 2
+
+        return result[0][0]
+
 
 class FiboClang:
     """
