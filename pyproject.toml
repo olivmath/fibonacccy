@@ -1,12 +1,11 @@
 [tool.poetry]
 name = "fibonacccy"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["Lucas Oliveira <olivmath@protonmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-cffi = "^1.16.0"
 python = "^3.9"
 
 [tool.poetry.group.dev.dependencies]
