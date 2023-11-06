@@ -28,7 +28,7 @@ class FiboPython:
 
         return b
 
-    def matrix_multiply(self, a, b):
+    def __matrix_multiply(self, a, b):
         x = a[0][0] * b[0][0] + a[0][1] * b[1][0]
         y = a[0][0] * b[0][1] + a[0][1] * b[1][1]
         z = a[1][0] * b[0][0] + a[1][1] * b[1][0]
@@ -46,8 +46,8 @@ class FiboPython:
         m = n - 1
         while m > 0:
             if m % 2 == 1:
-                result = self.matrix_multiply(result, a)
-            a = self.matrix_multiply(a, a)
+                result = self.__matrix_multiply(result, a)
+            a = self.__matrix_multiply(a, a)
             m //= 2
 
         return result[0][0]
@@ -61,14 +61,14 @@ class FiboClang:
     def __init__(self) -> None:
         path: str = "fibonacccy/clang_version/libfibonacccy_c.so"
         self.fibonacci_clang_lib = CDLL(path)
-        self.fibonacci_clang_lib.fibo.argtypes = [c_uint]
-        self.fibonacci_clang_lib.fibo.restype = c_ulonglong
+        self.fibonacci_clang_lib.fibo_recursive.argtypes = [c_uint]
+        self.fibonacci_clang_lib.fibo_recursive.restype = c_ulonglong
 
     def fibo(self, length: int) -> int:
         """
         # This function use `Clang` implementation under the hood
         """
-        return self.fibonacci_clang_lib.fibo(length)
+        return self.fibonacci_clang_lib.fibo_recursive(length)
 
 
 class FiboRust:
@@ -79,14 +79,14 @@ class FiboRust:
     def __init__(self):
         path: str = "fibonacccy/rust_version/libfibonacccy_rs.dylib"
         self.fibonacci_rust_lib = CDLL(path)
-        self.fibonacci_rust_lib.fibo.argtypes = [c_uint]
-        self.fibonacci_rust_lib.fibo.restype = c_ulonglong
+        self.fibonacci_rust_lib.fibo_recursive.argtypes = [c_uint]
+        self.fibonacci_rust_lib.fibo_recursive.restype = c_ulonglong
 
     def fibo(self, length: int) -> int:
         """
         # This function use `Rust` implementation under the hood
         """
-        return self.fibonacci_rust_lib.fibo(length)
+        return self.fibonacci_rust_lib.fibo_matrix_exponential(length)
 
 
 def fibo(index: int, implementation="python") -> int:
