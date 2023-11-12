@@ -125,10 +125,10 @@ def test_passing_function_and_array_of_arrays():
     lib.free_32.restype = None
 
     leafs = [
-        bytes.fromhex("3ac225168df54212a25c1c01fd35bebfea408fdac2e31ddd6f80a4bbf9a5f1cb"),
-        bytes.fromhex("b5553de315e0edf504d9150af82dafa5c4667fa618ed0a6f19c69b41166c5510"),
-        bytes.fromhex("0b42b6393c1f53060fe3ddbfcd7aadcca894465a5a438f69c87d790b2299b9b2"),
-        bytes.fromhex("f1918e8562236eb17adc8502332f4c9c82bc14e19bfc0aa10ab674ff75b3d2f3"),
+        bytes.fromhex("ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"),
+        bytes.fromhex("3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d"),
+        bytes.fromhex("2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6"),
+        bytes.fromhex("18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4"),
     ]
     pointer_array_type = POINTER(c_ubyte) * len(leafs)
     pointers = pointer_array_type(
@@ -139,7 +139,7 @@ def test_passing_function_and_array_of_arrays():
     result = bytes(result_ptr[:32])
     lib.free_32(result_ptr)
 
-    expected = "709472e68a228e0904b196b31863598a1bb675d5c8bda458045a18cdb8804b7e"
+    expected = "14ede5e8e97ad9372327728f5099b95604a39593cac3bd38a343ad76205213e7"
     expected_bytes = bytes.fromhex(expected)
     assert result.hex() == expected
     assert result == expected_bytes

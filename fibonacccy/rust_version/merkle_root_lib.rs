@@ -130,8 +130,7 @@ pub unsafe extern "C" fn make_root(
             .collect()
     }
 
-    let root = nodes.into_iter().next().unwrap_or_default();
-    println!("{:?}", root);
+    let root = nodes.into_iter().next().unwrap_or_default(); 
     let boxed_array = root.into_boxed_slice();
     Box::into_raw(boxed_array) as *mut u8
 }
