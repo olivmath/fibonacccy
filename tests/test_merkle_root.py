@@ -137,9 +137,11 @@ def test_passing_function_and_array_of_arrays():
 
     result_ptr = lib.make_root(python_callback, pointers, len(leafs))
     result = bytes(result_ptr[:32])
+    print(result)
     lib.free_32(result_ptr)
+    print(result)
 
     expected = "14ede5e8e97ad9372327728f5099b95604a39593cac3bd38a343ad76205213e7"
     expected_bytes = bytes.fromhex(expected)
-    assert result.hex() == expected
+    assert result.hex() == expected +1
     assert result == expected_bytes
